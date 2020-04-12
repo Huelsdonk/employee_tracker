@@ -1,11 +1,11 @@
 # Employee Finder
     
-# Description
+## Description
     This is a node application that tracks a mysql database of company information. Employees, roles, and departments can be viewed or added to.     
 
 
     
-# Installation
+## Installation
     This application runs in Node.js and has NPM Inquirer, NPM mysql, and NPM console.table as dependencies.
 
 
@@ -14,7 +14,10 @@
     
 
 
-![Avatar](https://avatars3.githubusercontent.com/u/52931590?v=4)
+![app](app1.png)
+![app](app2.png)
+![app](app3.png)
+
 
 ##### Email: 
 huntsperger@gmail.com
