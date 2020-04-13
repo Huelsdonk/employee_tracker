@@ -78,10 +78,9 @@ function Search() {
     });
 }
 
-// The below query is ridiculous
 
 function getEmployees() {
-  var query = "SELECT DISTINCT E1.id, concat(E1.first_name, ' ', E1.last_name) AS Employee, R1.title AS Job_Title, D1.name AS Department, R1.salary, concat(M1.first_name, ' ', M1.last_name) AS Manager_Name FROM employee E1 JOIN role R1 ON R1.id = E1.role_id JOIN department D1 ON R1.department_id = D1.id LEFT JOIN employee M1 ON E1.manager_id = M1.id JOIN employee E2 ON R1.id = E2.role_id";
+  var query = "SELECT DISTINCT E1.id, concat(E1.first_name, ' ', E1.last_name) AS Employee, R1.title AS Job_Title, D1.name AS Department, R1.salary, concat(M1.first_name, ' ', M1.last_name) AS Manager_Name FROM employee E1 JOIN role R1 ON R1.id = E1.role_id JOIN department D1 ON R1.department_id = D1.id LEFT JOIN employee M1 ON E1.manager_id = M1.id JOIN employee E2 ON R1.id = E2.role_id ORDER BY id";
   connection.query(query, function (err, res) {
     if (err) throw err;
     console.table(res)
@@ -90,7 +89,7 @@ function getEmployees() {
 }
 
 function getDepartments() {
-  var query = "SELECT name AS Department, sum(role.salary) AS Department_Budget FROM companyDB.department JOIN companyDB.role ON companyDB.department.id = companyDB.role.department_id GROUP by department.name";
+  var query = "SELECT name, sum(salary) FROM companyDB.employee JOIN companyDB.ROLE ON role.id = employee.role_id AND employee.id IS NOT NULL JOIN companyDB.department ON role.department_id = department.id GROUP BY department.name";
   connection.query(query, function (err, res) {
     if (err) throw err;
     console.table(res)
@@ -144,12 +143,7 @@ function addEmployee() {
           name: "manager",
           type: "number",
           message: "What is the Employee's Manager ID? (Nope, not going to retrieve the names here. Did it in employee query)?",
-          validate: function (value) {
-            if (value < 10) {
-              return true;
-            }
-            return "Please enter a number"
-          }
+          
         }
 
 
