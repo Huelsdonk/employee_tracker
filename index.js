@@ -158,6 +158,29 @@ function addEmployee() {
             role_id: roleList.indexOf(answer.role) + 1,
             manager_id: answer.manager
           },
+
+          // An additional query (as below) might be a better way to get role_id... 
+          // certainly better if I added deleting functionality since the auto increment
+          // doesn't reset. I don't have that built in currently, so I'm going to leave 
+          // this as a comment since it works either way.
+          
+
+          // var query = "SELECT id FROM companyDB.role where title = '?'";
+          // connection.query(`SELECT id FROM companyDB.role where title = '${answer.role}'`,
+              
+          // function (err, res) {
+          //     if (err) throw err;
+
+          //     connection.query(
+          //         "INSERT INTO employee SET ?",
+          //         {
+          //             first_name: answer.first,
+          //             last_name: answer.last,
+          //             role_id: res,
+          //             manager_id: answer.manager
+          //         },
+
+
           function (err) {
             if (err) throw err;
 
